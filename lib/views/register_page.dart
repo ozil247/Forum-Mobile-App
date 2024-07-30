@@ -1,8 +1,14 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:forum_app/model/auth_vm.dart';
+import 'package:forum_app/views/login_page.dart';
 import 'package:forum_app/views/widgets/input_widget.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -12,10 +18,9 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<AuthVm>(context);
     var size = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
@@ -25,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Login Page',
+                'Register Page',
                 style: GoogleFonts.poppins(fontSize: size * 0.080),
               ),
               const SizedBox(
@@ -33,7 +38,23 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               InputWidget(
                 hintText: 'Email',
-                controller: _emailController,
+                controller: vm.email,
+                obscureText: false,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              InputWidget(
+                hintText: 'Name',
+                controller: vm.name,
+                obscureText: false,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              InputWidget(
+                hintText: 'Username',
+                controller: vm.username,
                 obscureText: false,
               ),
               SizedBox(
@@ -41,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               InputWidget(
                 hintText: 'Password',
-                controller: _passwordController,
+                controller: vm.password,
                 obscureText: true,
               ),
               SizedBox(
@@ -57,13 +78,29 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),
-                  onPressed: () {},
+                  onPressed: () => {vm.register(context)},
                   child: Text(
-                    'Login',
+                    'Register',
                     style: GoogleFonts.poppins(
                       fontSize: size * 0.040,
                       textStyle: TextStyle(
                         color: Colors.white,
+                      ),
+                    ),
+                  )),
+              const SizedBox(
+                height: 20,
+              ),
+              TextButton(
+                  onPressed: () {
+                    Get.to(() => const LoginPage());
+                  },
+                  child: Text(
+                    'Already have an account login',
+                    style: GoogleFonts.poppins(
+                      fontSize: size * 0.040,
+                      textStyle: TextStyle(
+                        color: Colors.black,
                       ),
                     ),
                   ))

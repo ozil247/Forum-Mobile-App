@@ -1,9 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:forum_app/model/auth_vm.dart';
 import 'package:forum_app/views/register_page.dart';
 import 'package:forum_app/views/widgets/input_widget.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,10 +16,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<AuthVm>(context);
+
     var size = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Center(
@@ -34,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InputWidget(
                 hintText: 'Email',
-                controller: _emailController,
+                controller: vm.username,
                 obscureText: false,
               ),
               SizedBox(
@@ -42,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               InputWidget(
                 hintText: 'Password',
-                controller: _passwordController,
+                controller: vm.password,
                 obscureText: true,
               ),
               SizedBox(
@@ -58,7 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5))),
-                  onPressed: () {},
+                  onPressed: () {
+                    vm.register(context);
+                  },
                   child: Text(
                     'Login',
                     style: GoogleFonts.poppins(
@@ -73,10 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.pop(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegisterPage()));
+                    Get.to(() => const RegisterPage());
                   },
                   child: Text(
                     'Register',

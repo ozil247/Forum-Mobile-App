@@ -36,6 +36,16 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   google_fonts: ^6.2.1
+  provider: ^6.1.2
+  get: ^4.6.6
+  http: ^1.2.2
+  screen_loader: ^4.0.1
+  ars_dialog: ^1.0.8
+  top_snackbar_flutter: ^3.1.0
+  shared_preferences:
+  get_it: ^7.2.0
+
+
 
 dev_dependencies:
   flutter_test:

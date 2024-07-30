@@ -16,7 +16,7 @@ class InputWidget extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
         color:  Colors.grey[300],
-        borderRadius: BorderRadius.circular(10)
+        borderRadius: BorderRadius.circular(5)
       ),
       child:  TextField(
         obscureText: obscureText,
